@@ -14,7 +14,7 @@ final class GDT_EmailFormat extends GDT_Enum
 	const TEXT = 'text';
 	const HTML = 'html';
 	
-	public function defaultLabel()
+	public function defaultLabel() : self
 	{
 		return $this->label('email_fmt');
 	}

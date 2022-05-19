@@ -20,7 +20,7 @@ class GDT_Email extends GDT_String
 	
 	public bool $orderable = false;
 	
-	public function defaultLabel() { return $this->label('email'); }
+	public function defaultLabel() : self { return $this->label('email'); }
 	
 	public function renderForm() : string { return GDT_Template::php('Mail', 'form/email.php', ['field' => $this]); }
 	public function renderCell() : string { return GDT_Template::php('Mail', 'cell/email.php', ['field' => $this]); }
