@@ -12,7 +12,8 @@ use GDO\UI\GDT_Link;
  * - Send function.
  * 
  * @author gizmore
- *
+ * @version 7.0.0
+ * @since 7.0.0
  */
 final class Module_Mail extends GDO_Module
 {
@@ -20,7 +21,7 @@ final class Module_Mail extends GDO_Module
     
     public function getDependencies() : array
     {
-    	return ['Mailer'];
+    	return ['User', 'Mailer'];
     }
     
     public function onLoadLanguage() : void
@@ -54,7 +55,7 @@ final class Module_Mail extends GDO_Module
         {
             if ($this->cfgAllowEmail())
             {
-                GDT_Page::$INSTANCE->rightNav->addField(
+                GDT_Page::instance()->rightNav->addField(
                     GDT_Link::make('ft_mail_send')->href(
                         href('Mail', 'Send')));
             }
