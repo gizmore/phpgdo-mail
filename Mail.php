@@ -237,8 +237,8 @@ final class Mail
 		$from = $this->getUTF8Sender();
 		$subject = $this->getUTF8Subject();
 		$random_hash = sha1(microtime(true));
-		$bound_mix = "GDO6-MIX-{$random_hash}";
-		$bound_alt = "GDO6-ALT-{$random_hash}";
+		$bound_mix = "GDOv7-MIX-{$random_hash}";
+		$bound_alt = "GDOv7-ALT-{$random_hash}";
 		$headers = 
 			"Content-Type: multipart/mixed; boundary=\"{$bound_mix}\"".self::HEADER_NEWLINE
 			."MIME-Version: 1.0".self::HEADER_NEWLINE
