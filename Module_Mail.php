@@ -55,7 +55,7 @@ final class Module_Mail extends GDO_Module
         {
             if ($this->cfgAllowEmail())
             {
-                GDT_Page::instance()->rightNav->addField(
+                GDT_Page::instance()->rightBar()->addField(
                     GDT_Link::make('ft_mail_send')->href(
                         href('Mail', 'Send')));
             }
