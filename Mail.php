@@ -171,7 +171,7 @@ final class Mail
 		if ($mail = $user->getMail())
 		{
 			$this->setReceiver($mail);
-			$this->setReceiverName($user->displayNameLabel());
+			$this->setReceiverName($user->renderUserName());
 			
 			$this->setupGPG($user);
 	
