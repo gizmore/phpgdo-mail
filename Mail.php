@@ -168,14 +168,15 @@ final class Mail
 	 */
 	public function sendToUser(GDO_User $user)
 	{
-		if ($mail = $user->getMail())
+		$mod = Module_Mail::instance();
+		if ($mail = $mod->cfgUserEmail($user))
 		{
 			$this->setReceiver($mail);
 			$this->setReceiverName($user->renderUserName());
 			
 			$this->setupGPG($user);
 	
-			if ($user->wantsTextMail())
+			if ($mod->cfgUserEmailFormat($user) === 'text')
 			{
 				return $this->sendAsText();
 			}

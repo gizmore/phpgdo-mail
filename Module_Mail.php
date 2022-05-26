@@ -5,6 +5,7 @@ use GDO\Core\GDO_Module;
 use GDO\Core\GDT_Checkbox;
 use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Link;
+use GDO\User\GDO_User;
 
 /**
  * - Mail stuff.
@@ -49,6 +50,22 @@ final class Module_Mail extends GDO_Module
         ];
     }
     
+    public function cfgUserEmail(GDO_User $user=null) : ?string
+    {
+    	$user = $user ? $user : GDO_User::current();
+    	return $this->userSettingVar($user, 'email');
+    }
+    public function cfgUserAllowEmail(GDO_User $user=null) : string
+    {
+    	$user = $user ? $user : GDO_User::current();
+    	return $this->userSettingVar($user, 'allow_email');
+    }
+    public function cfgUserEmailFormat(GDO_User $user=null) : string
+    {
+    	$user = $user ? $user : GDO_User::current();
+    	return $this->userSettingVar($user, 'email_format');
+    }
+
     public function onInitSidebar() : void
     {
         if ($this->cfgSidebar())
