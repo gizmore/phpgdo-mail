@@ -17,7 +17,7 @@ class GDT_Email extends GDT_String
 
 	public string $pattern = "/^[^@]+@[^@]+$/iD";
 
-	public $icon = 'email';
+	public string $icon = 'email';
 
 	public function isOrderable(): bool
 	{
