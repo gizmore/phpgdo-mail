@@ -6,6 +6,8 @@ use GDO\Core\GDT_Checkbox;
 use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
+use GDO\UI\GDT_Bar;
+use GDO\Date\GDT_DateTime;
 
 /**
  * - Mail stuff.
@@ -41,13 +43,20 @@ final class Module_Mail extends GDO_Module
     public function cfgSidebar() : string { return $this->getConfigVar('show_in_sidebar'); }
     public function cfgAllowEmail() : string { return $this->getConfigVar('allow_email'); }
 
+    public function getUserConfig() : array
+    {
+    	return [
+    		GDT_Email::make('email'),
+    		GDT_DateTime::make('email_confirmed'),
+    	];
+    }
+    
     public function getUserSettings() : array
     {
-        return [
-        	GDT_Email::make('email'),
-            GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email'),
-            GDT_EmailFormat::make('email_format')->initial('html'),
-        ];
+    	return [
+    		GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email'),
+    		GDT_EmailFormat::make('email_format')->initial('html'),
+    	];
     }
     
     public function cfgUserEmail(GDO_User $user=null) : ?string
@@ -77,6 +86,11 @@ final class Module_Mail extends GDO_Module
                         href('Mail', 'Send')));
             }
         }
+    }
+    
+    public function hookAccountBar(GDT_Bar $nav)
+    {
+//     	die('CX');
     }
     
 }

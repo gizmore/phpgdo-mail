@@ -19,6 +19,11 @@ class GDT_Email extends GDT_String
 
 	public string $icon = 'email';
 
+	public function getInputType() : string
+	{
+		return 'email';
+	}
+	
 	public function isOrderable(): bool
 	{
 		return false;
@@ -29,17 +34,9 @@ class GDT_Email extends GDT_String
 		return $this->label('email');
 	}
 
-	public function renderForm(): string
-	{
-		return GDT_Template::php('Mail', 'form/email.php',
-			[
-				'field' => $this
-			]);
-	}
-
 	public function renderHTML(): string
 	{
-		return GDT_Template::php('Mail', 'cell/email.php',
+		return GDT_Template::php('Mail', 'email_html.php',
 			[
 				'field' => $this
 			]);
