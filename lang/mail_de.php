@@ -2,7 +2,7 @@
 namespace GDO\Mail\lang;
 return [
 	'cfg_user_allow_email' => 'Personen erlauben, Ihnen E-Mails zu senden?',
-	'ft_mail_send' => 'Mail senden',
+	'mt_mail_send' => 'Mail senden',
 	'enum_html' => 'HTML',
 	'enum_text' => 'Text',
 	'info_send_mail' => 'Hier können Sie eine E-Mail an einen Benutzer senden. Ihre eigene E-Mail wird bekannt gegeben.',
@@ -22,4 +22,15 @@ Nachricht:
 	
 Mit freundlichen Grüßen
 Das %3$s-System',
+
+	# 7.0.0
+	'mt_mail_change' => 'E-Mail Ändern',
+	'md_mail_change' => 'Ändern Sie Ihre E-Mail Adresse',
+	
+	'mt_mail_validate' => 'E-Mail Bestätigen',
+	'md_mail_validate' => 'Validieren Sie Ihre E-Mail Adresse',
+	
+	'email' => 'E-Mail',
+	'email_confirmed' => 'Bestätigt am',
+	
 ];

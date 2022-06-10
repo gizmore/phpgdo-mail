@@ -10,13 +10,15 @@ use GDO\UI\GDT_Bar;
 use GDO\Date\GDT_DateTime;
 
 /**
- * - Mail stuff.
+ * Mail stuff.
+ * 
  * - Some user settings.
  * - Send function.
+ * - Validate and Changemail
  * 
  * @author gizmore
  * @version 7.0.0
- * @since 7.0.0
+ * @since 6.0.0
  */
 final class Module_Mail extends GDO_Module
 {
@@ -25,6 +27,11 @@ final class Module_Mail extends GDO_Module
     public function getDependencies() : array
     {
     	return ['User', 'Mailer'];
+    }
+    
+    public function getFriendencies() : array
+    {
+    	return ['Account'];
     }
     
     public function onLoadLanguage() : void
@@ -59,6 +66,19 @@ final class Module_Mail extends GDO_Module
     	];
     }
     
+    public function cfgUserEmailConfirmed(GDO_User $user=null) : ?string
+    {
+    	if ($this->cfgUserEmailIsConfirmed($user))
+    	{
+    		return $this->cfgUserEmail($user);
+    	}
+    	return null;
+    }
+    public function cfgUserEmailIsConfirmed(GDO_User $user=null) : ?string
+    {
+    	$user = $user ? $user : GDO_User::current();
+    	return $this->userSettingVar($user, 'email_confirmed');
+    }
     public function cfgUserEmail(GDO_User $user=null) : ?string
     {
     	$user = $user ? $user : GDO_User::current();
@@ -90,7 +110,14 @@ final class Module_Mail extends GDO_Module
     
     public function hookAccountBar(GDT_Bar $nav)
     {
-//     	die('CX');
+    	if ($this->cfgUserEmailConfirmed())
+    	{
+    		$nav->addField(GDT_Link::make('mt_mail_change')->href(href('Mail', 'Change')));
+    	}
+    	else
+    	{
+    		$nav->addField(GDT_Link::make('mt_mail_validate')->href(href('Mail', 'Validate')));
+    	}
     }
     
 }

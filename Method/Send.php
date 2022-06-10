@@ -16,8 +16,10 @@ use GDO\User\GDT_User;
 
 /**
  * Send a mail to a user.
+ * 
  * @author gizmore
  * @version 7.0.0
+ * @since 6.2.0
  */
 final class Send extends MethodForm
 {
@@ -37,7 +39,7 @@ final class Send extends MethodForm
 		}
 		else
 		{
-			$form->info(t('info_need_mail'));
+			$form->text('info_need_mail');
 			$form->actions()->addField(GDT_Submit::make()->disabled());
 		}
 	}

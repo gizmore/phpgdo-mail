@@ -2,7 +2,7 @@
 namespace GDO\Mail\lang;
 return [
     'cfg_user_allow_email' => 'Allow people to email you?',
-    'ft_mail_send' => 'Send a mail',
+    'mt_mail_send' => 'Send a mail',
     'enum_html' => 'HTML',
     'enum_text' => 'Text',
     'info_send_mail' => 'Here you can send a mail to a user. Your own email will be known to them.',
@@ -22,4 +22,15 @@ Message:
 
 Sincerly,
 The %3$s system',
+	
+	# 7.0.0
+	'mt_mail_change' => 'Change Email',
+	'md_mail_change' => 'Change your Email Address',
+	
+	'mt_mail_validate' => 'Validate Email',
+	'md_mail_validate' => 'Validate your Email Address',
+	
+	'email' => 'E-Mail',
+	'email_confirmed' => 'Confirmed at',
+	
 ];
