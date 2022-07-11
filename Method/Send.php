@@ -77,15 +77,15 @@ final class Send extends MethodForm
 		
 		$mail = Mail::botMail();
 		$mail->setReturn($from->getMail());
-		$mail->setReturnName($from->displayNameLabel());
+		$mail->setReturnName($from->renderUserName());
 		$mail->setReceiver($to->getMail());
-		$mail->setReceiverName($to->displayNameLabel());
+		$mail->setReceiverName($to->renderUserName());
 		$mail->setSubject(t('mail_send_arbr_subj',
-			[sitename(), $title, $from->displayNameLabel()]));
+			[sitename(), $title, $from->renderUserName()]));
 		
 		$bodyArgs = [
-			$to->displayNameLabel(),
-			$from->displayNameLabel(),
+			$to->renderUserName(),
+			$from->renderUserName(),
 			sitename(),
 			$title,
 			$form->getFormValue('message'),
@@ -94,7 +94,7 @@ final class Send extends MethodForm
 		
 		$mail->sendToUser($to);
 		
-		return $this->message('msg_arbr_mail_sent', [$to->displayNameLabel()]);
+		return $this->message('msg_arbr_mail_sent', [$to->renderUserName()]);
 	}
 	
 }
