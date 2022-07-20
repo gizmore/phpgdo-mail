@@ -33,4 +33,16 @@ The %3$s system',
 	'email' => 'E-Mail',
 	'email_confirmed' => 'Confirmed at',
 	
+	# Request validation
+	'mailt_confirm_email' => '%s: Confirm your E-Mail',
+	'mailb_confirm_email' => '
+Hello %s,
+
+Please confirm your E-Mail address by visiting this link:
+
+%s
+
+Sincerly,
+The %s Team',
+	
 ];

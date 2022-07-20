@@ -8,6 +8,8 @@ use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Bar;
 use GDO\Date\GDT_DateTime;
+use GDO\Register\GDO_UserActivation;
+use GDO\Date\Time;
 
 /**
  * Mail stuff.
@@ -116,8 +118,17 @@ final class Module_Mail extends GDO_Module
     	}
     	else
     	{
-    		$nav->addField(GDT_Link::make('mt_mail_validate')->href(href('Mail', 'Validate')));
+    		$nav->addField(GDT_Link::make('mt_mail_validate')->href(href('Mail', 'RequestValidation')));
     	}
     }
     
+    public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation)
+    {
+    	if ($email = $activation->getEmail())
+    	{
+    		$this->saveUserSetting($user, 'email', $email);
+    		$this->saveUserSetting($user, 'email_confirmed', Time::getDate());
+    	}
+    }
+
 }

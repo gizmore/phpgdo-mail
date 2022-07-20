@@ -175,18 +175,24 @@ final class Mail
 			$this->setReceiverName($user->renderUserName());
 			
 			$this->setupGPG($user);
-	
-			if ($mod->cfgUserEmailFormat($user) === 'text')
-			{
-				return $this->sendAsText();
-			}
-			else
-			{
-				return $this->sendAsHTML();
-			}
+			
+			$format = $mod->cfgUserEmailFormat($user);
+			return $this->sendAsFormat($format);
 		}
 	}
 
+	public function sendAsFormat(string $format) : bool
+	{
+		if ($format === 'text')
+		{
+			return $this->sendAsText();
+		}
+		else
+		{
+			return $this->sendAsHTML();
+		}
+	}
+	
 	public function sendAsText($cc='', $bcc='')
 	{
 		return $this->send($cc, $bcc, $this->nestedTextBody(), false);
@@ -229,6 +235,10 @@ final class Mail
 		elseif (self::$ENABLE && module_enabled('Mail'))
 	    {
     	    return mail($to, $subject, $encrypted, $headers);
+		}
+		else
+		{
+			return false;
 		}
 	}
 	
@@ -302,22 +312,22 @@ final class Mail
 		}
 	}
 	
-	public function setupGPG(GDO_User $user)
-	{
-		if ($this->allowGPG)
-		{
-			if (function_exists('gnupg_init'))
-			{
-				if (module_enabled('MailGPG'))
-				{
-					if ($fingerprint = GDO_PublicKey::getFingerprintForUser($user))
-					{
-						$this->setGPGKey($fingerprint);
-					}
-				}
-			}
-		}
-	}
+// 	public function setupGPG(GDO_User $user)
+// 	{
+// 		if ($this->allowGPG)
+// 		{
+// 			if (function_exists('gnupg_init'))
+// 			{
+// 				if (module_enabled('MailGPG'))
+// 				{
+// 					if ($fingerprint = GDO_PublicKey::getFingerprintForUser($user))
+// 					{
+// 						$this->setGPGKey($fingerprint);
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
 
 	private function encrypt($message)
 	{
