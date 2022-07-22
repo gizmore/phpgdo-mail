@@ -33,7 +33,9 @@ final class Send extends MethodForm
 				GDT_Title::make('title')->notNull(),
 				GDT_Message::make('message')->notNull(),
 				GDT_AntiCSRF::make(),
-				GDT_Validator::make('validate_allowance')->validator('user', [$this, 'validateAllowance']),
+			);
+			$form->addFields(
+				GDT_Validator::make('validate_allowance')->validatorFor($form, 'user', [$this, 'validateAllowance']),
 			);
 			$form->actions()->addField(GDT_Submit::make());
 		}

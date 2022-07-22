@@ -174,7 +174,7 @@ final class Mail
 			$this->setReceiver($mail);
 			$this->setReceiverName($user->renderUserName());
 			
-			$this->setupGPG($user);
+// 			$this->setupGPG($user);
 			
 			$format = $mod->cfgUserEmailFormat($user);
 			return $this->sendAsFormat($format);

@@ -28,7 +28,7 @@ final class Module_Mail extends GDO_Module
     
     public function getDependencies() : array
     {
-    	return ['User', 'Mailer'];
+    	return ['Mailer'];
     }
     
     public function getFriendencies() : array
@@ -45,11 +45,11 @@ final class Module_Mail extends GDO_Module
     {
         return [
             GDT_Checkbox::make('allow_email')->initial('1'),
-            GDT_Checkbox::make('show_in_sidebar')->initial('0'),
+            GDT_Checkbox::make('hook_sidebar')->initial('0'),
         ];
     }
     
-    public function cfgSidebar() : string { return $this->getConfigVar('show_in_sidebar'); }
+    public function cfgSidebar() : string { return $this->getConfigVar('hook_sidebar'); }
     public function cfgAllowEmail() : string { return $this->getConfigVar('allow_email'); }
 
     public function getUserConfig() : array
