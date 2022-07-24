@@ -5,8 +5,9 @@ use GDO\Core\GDT_Enum;
 
 /**
  * Enum that switches between text und html format.
+ * 
  * @author gizmore
- * @version 7.0.0
+ * @version 7.0.1
  * @since 5.0
  */
 final class GDT_EmailFormat extends GDT_Enum

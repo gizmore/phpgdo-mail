@@ -19,7 +19,7 @@ use GDO\Date\Time;
  * - Validate and Changemail
  * 
  * @author gizmore
- * @version 7.0.0
+ * @version 7.0.1
  * @since 6.0.0
  */
 final class Module_Mail extends GDO_Module
@@ -56,7 +56,7 @@ final class Module_Mail extends GDO_Module
     {
     	return [
     		GDT_Email::make('email'),
-    		GDT_DateTime::make('email_confirmed'),
+    		GDT_DateTime::make('email_confirmed')->noacl(),
     	];
     }
     
@@ -104,7 +104,7 @@ final class Module_Mail extends GDO_Module
             if ($this->cfgAllowEmail())
             {
                 GDT_Page::instance()->rightBar()->addField(
-                    GDT_Link::make('ft_mail_send')->href(
+                    GDT_Link::make('mt_mail_send')->href(
                         href('Mail', 'Send')));
             }
         }
@@ -122,7 +122,7 @@ final class Module_Mail extends GDO_Module
     	}
     }
     
-    public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation)
+    public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation=null)
     {
     	if ($email = $activation->getEmail())
     	{

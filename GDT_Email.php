@@ -3,6 +3,7 @@ namespace GDO\Mail;
 
 use GDO\Core\GDT_String;
 use GDO\Core\GDT_Template;
+use GDO\User\GDO_User;
 
 /**
  * Email field.
@@ -22,6 +23,11 @@ class GDT_Email extends GDT_String
 	public function getInputType() : string
 	{
 		return 'email';
+	}
+	
+	public function isSearchable() : bool
+	{
+		return GDO_User::current()->isStaff();
 	}
 	
 	public function isOrderable(): bool

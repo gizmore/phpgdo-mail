@@ -2,7 +2,7 @@
 namespace GDO\Mail\lang;
 return [
 	'cfg_user_allow_email' => 'Personen erlauben, Ihnen E-Mails zu senden?',
-	'ft_mail_send' => 'Mail senden',
+	'mt_mail_send' => 'Mail senden',
 	'enum_html' => 'HTML',
 	'enum_text' => 'Text',
 	'info_send_mail' => 'Hier können Sie eine E-Mail an einen Benutzer senden. Ihre eigene E-Mail wird bekannt gegeben.',
