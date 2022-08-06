@@ -60,10 +60,17 @@ final class Module_Mail extends GDO_Module
     	];
     }
     
+    public function getACLDefaults() : ?array
+    {
+    	return [
+    		'email_format' => ['acl_all', 0, null],
+    	];
+    }
+    
     public function getUserSettings() : array
     {
     	return [
-    		GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email'),
+    		GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email')->noacl(),
     		GDT_EmailFormat::make('email_format')->initial('html'),
     	];
     }
