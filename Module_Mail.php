@@ -124,10 +124,13 @@ final class Module_Mail extends GDO_Module
     
     public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation=null)
     {
-    	if ($email = $activation->getEmail())
+    	if ($activation !== null)
     	{
-    		$this->saveUserSetting($user, 'email', $email);
-    		$this->saveUserSetting($user, 'email_confirmed', Time::getDate());
+	    	if ($email = $activation->getEmail())
+	    	{
+	    		$this->saveUserSetting($user, 'email', $email);
+	    		$this->saveUserSetting($user, 'email_confirmed', Time::getDate());
+	    	}
     	}
     }
 
