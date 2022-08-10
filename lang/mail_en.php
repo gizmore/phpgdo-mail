@@ -47,4 +47,8 @@ The %s Team',
 	
 	# 7.0.1
 	'cfg_allow_email' => 'Allow email sending for users',
+
+	'mt_mail_requestvalidation' => 'E-Mail Validation',
+	'info_email_request_validation' => 'Here you can setup your account email.',
+	
 ];

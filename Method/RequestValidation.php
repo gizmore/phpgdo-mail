@@ -33,7 +33,7 @@ final class RequestValidation extends MethodForm
 		$user = GDO_User::current();
 		$form->text('info_email_request_validation');
 		$mail = $user->getMail(false);
-		$field = GDT_Email::make('email')->initial($mail)->required();
+		$field = GDT_Email::make('_email')->initial($mail)->required();
 		$form->addFields($field, GDT_AntiCSRF::make());
 		$form->actions()->addField(GDT_Submit::make());
 	}
@@ -41,7 +41,7 @@ final class RequestValidation extends MethodForm
 	public function formValidated(GDT_Form $form)
 	{
 		$user = GDO_User::current();
-		$this->sendMail($user, $form->getFormVar('email'));
+		$this->sendMail($user, $form->getFormVar('_email'));
 	}
 	
 	public function sendMail(GDO_User $user, string $email)
@@ -53,7 +53,7 @@ final class RequestValidation extends MethodForm
 		$mail->setSubject(t('mailt_confirm_email', [sitename()]));
 		$uid = $user->getID();
 		$token = GDT_Token::generateToken($email . $uid);
-		$append = sprintf('&user=%d&email=%s&token=%s&submit=1',
+		$append = sprintf('&user=%d&_email=%s&token=%s&submit=1',
 			$uid, urlencode($email), $token);
 		$link = GDT_Link::absolute(href('Mail', 'Confirm', $append));
 		$args = [
