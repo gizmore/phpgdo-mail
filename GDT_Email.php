@@ -50,7 +50,8 @@ class GDT_Email extends GDT_String
 
 	public function plugVar(): string
 	{
-		return 'gizmore@wechall.net';
+		$num = spl_object_id($this);
+		return "gizmore_{$num}@wechall.net";
 	}
 	
 	###############
