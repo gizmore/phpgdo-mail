@@ -13,9 +13,9 @@ use GDO\Date\Time;
 
 /**
  * Mail stuff.
+ * Meanwhile it split between Mail (for GDO/GDT) and multiple Mailer Providers.
  * 
  * - Some user settings.
- * - Send function.
  * - Validate and Changemail
  * 
  * @author gizmore
@@ -83,21 +83,25 @@ final class Module_Mail extends GDO_Module
     	}
     	return null;
     }
+    
     public function cfgUserEmailIsConfirmed(GDO_User $user=null) : ?string
     {
     	$user = $user ? $user : GDO_User::current();
     	return $this->userSettingVar($user, 'email_confirmed');
     }
+    
     public function cfgUserEmail(GDO_User $user=null) : ?string
     {
     	$user = $user ? $user : GDO_User::current();
     	return $this->userSettingVar($user, 'email');
     }
+    
     public function cfgUserAllowEmail(GDO_User $user=null) : string
     {
     	$user = $user ? $user : GDO_User::current();
     	return $this->userSettingVar($user, 'allow_email');
     }
+    
     public function cfgUserEmailFormat(GDO_User $user=null) : string
     {
     	$user = $user ? $user : GDO_User::current();

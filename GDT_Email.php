@@ -48,10 +48,11 @@ class GDT_Email extends GDT_String
 			]);
 	}
 
-	public function plugVar(): string
+	public function plugVars() : array
 	{
-		$num = spl_object_id($this);
-		return "gizmore_{$num}@wechall.net";
+		return [
+			[$this->getName() => 'gizmore@wechall.net'],
+		];
 	}
 	
 	###############
