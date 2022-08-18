@@ -239,9 +239,10 @@ final class Mail
 		{
 			if (self::$ENABLE)
 			{
-				Mailer::send($this);
+				return Mailer::send($this);
 			}
 		}
+		return false;
 	}
 	
 	private function printMailToDebugIt()
