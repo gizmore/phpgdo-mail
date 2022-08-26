@@ -57,6 +57,8 @@ final class Mail
 	private $format = 'html'; # will send both anyway?
 
 	private $allowGPG = true;
+	
+	public function isHTML() { return $this->format === 'html'; }
 
 	public function setCC($cc) { $this->cc = $cc; }
 	public function setBCC($bcc) { $this->bcc = $bcc; }
