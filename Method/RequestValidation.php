@@ -20,7 +20,7 @@ use GDO\Mail\Module_Mail;
  */
 final class RequestValidation extends MethodForm
 {
-	public function beforeExecute() : void
+	public function onRenderTabs() : void
 	{
 		if (module_enabled('Account'))
 		{
