@@ -20,7 +20,7 @@ final class Confirm extends MethodForm
 	{
 		$form->addFields(
 			GDT_User::make('user')->required(),
-			GDT_Email::make('email')->required(),
+			GDT_Email::make('_email')->required(),
 			GDT_Token::make('token')->required(),
 		);
 		$form->addFields(
@@ -36,7 +36,7 @@ final class Confirm extends MethodForm
 	
 	public function getEmail() : string
 	{
-		return $this->gdoParameterVar('email');
+		return $this->gdoParameterVar('_email');
 	}
 	
 	public function getToken() : string
@@ -70,7 +70,4 @@ final class Confirm extends MethodForm
 		$mod->saveUserSetting($user, 'email_confirmed', $now);
 	}
 
-
-
-	
 }

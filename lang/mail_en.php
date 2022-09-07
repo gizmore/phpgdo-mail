@@ -26,6 +26,7 @@ The %3$s system',
 	# 7.0.0
 	'mt_mail_change' => 'Change Email',
 	'md_mail_change' => 'Change your Email Address',
+	'msg_mail_changing' => 'You are about to change your email to `%s`. Please confirm this.',
 	
 	'mt_mail_validate' => 'Validate Email',
 	'md_mail_validate' => 'Validate your Email Address',
@@ -34,6 +35,7 @@ The %3$s system',
 	'email_confirmed' => 'Confirmed at',
 	
 	# Request validation
+	'msg_mail_confirmed' => 'Your E-Mail has been confirmed and set to `%s`.',
 	'mailt_confirm_email' => '%s: Confirm your E-Mail',
 	'mailb_confirm_email' => '
 Hello %s,
