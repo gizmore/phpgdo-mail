@@ -2,14 +2,13 @@
 namespace GDO\Mail;
 
 use GDO\Core\GDT_String;
-use GDO\Core\GDT_Template;
 use GDO\User\GDO_User;
 
 /**
  * Email field.
  *
  * @author gizmore
- * @version 7.0.0
+ * @version 7.0.1
  * @since 5.0.0
  */
 class GDT_Email extends GDT_String
@@ -42,10 +41,11 @@ class GDT_Email extends GDT_String
 
 	public function renderHTML(): string
 	{
-		return GDT_Template::php('Mail', 'email_html.php',
-			[
-				'field' => $this
-			]);
+		if (!($mail = $this->getVar()))
+		{
+			return self::none();
+		}
+		return "<a class=\"gdo-email\" href=\"mailto:{$mail}\">{$mail}</a>";
 	}
 
 	public function plugVars() : array
