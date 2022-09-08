@@ -28,8 +28,8 @@ Das %3$s-System',
 	'md_mail_change' => 'Ändern Sie Ihre E-Mail Adresse',
 	'msg_mail_changing' => 'Sie wollen Ihre E-Mail Adresse zu `%s` ändern. Bitte bestätigen Sie dies.',
 	
-	'mt_mail_confirm' => 'E-Mail Bestätigen',
-	'md_mail_confirm' => 'Validieren Sie Ihre E-Mail Adresse',
+	'mt_mail_validate' => 'E-Mail Bestätigen',
+	'md_mail_validate' => 'Validieren Sie Ihre E-Mail Adresse',
 	
 	'email' => 'E-Mail',
 	'email_confirmed' => 'Bestätigt am',
