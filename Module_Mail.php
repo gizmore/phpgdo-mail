@@ -10,6 +10,7 @@ use GDO\UI\GDT_Bar;
 use GDO\Date\GDT_DateTime;
 use GDO\Register\GDO_UserActivation;
 use GDO\Date\Time;
+use GDO\User\GDT_ACLRelation;
 
 /**
  * Mail stuff.
@@ -63,7 +64,7 @@ final class Module_Mail extends GDO_Module
     public function getACLDefaults() : ?array
     {
     	return [
-    		'email_format' => ['acl_all', 0, null],
+    		'email_format' => [GDT_ACLRelation::HIDDEN, 0, null],
     	];
     }
     
@@ -71,7 +72,7 @@ final class Module_Mail extends GDO_Module
     {
     	return [
     		GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email')->noacl(),
-    		GDT_EmailFormat::make('email_format')->initial('html'),
+    		GDT_EmailFormat::make('email_format')->initial('html')->noacl(),
     	];
     }
     
