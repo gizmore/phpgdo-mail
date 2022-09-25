@@ -133,11 +133,11 @@ final class Mail
 	{
 		if (self::$DEBUG || (!class_exists('GDO\Core\GDT_Template')))
 		{
-		    if (class_exists('GDO\Util\Strings'))
-		    {
+// 		    if (class_exists('GDO\Util\Strings'))
+// 		    {
 		        return Strings::nl2brHTMLSafe($this->body);
-		    }
-		    return $this->body;
+// 		    }
+// 		    return $this->body;
 		}
 		$tVars = [
 			'content' => $this->body,
