@@ -11,6 +11,7 @@ use GDO\Date\GDT_DateTime;
 use GDO\Register\GDO_UserActivation;
 use GDO\Date\Time;
 use GDO\User\GDT_ACLRelation;
+use GDO\Core\GDT;
 
 /**
  * Mail stuff.
@@ -145,5 +146,14 @@ final class Module_Mail extends GDO_Module
 	    	}
     	}
     }
-
+    
+    public static function displayMailLink(GDO_User $user) : string
+    {
+    	if ($mail = $user->getMail())
+    	{
+    		return "<a href=\"mailto:{$mail}\">{$mail}</a>";
+    	}
+    	return GDT::EMPTY_STRING;
+    }
+    
 }
