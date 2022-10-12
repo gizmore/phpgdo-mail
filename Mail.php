@@ -131,13 +131,13 @@ final class Mail
 	
 	public function nestedHTMLBody()
 	{
-		if (self::$DEBUG || (!class_exists('GDO\Core\GDT_Template')))
+		if (!class_exists('GDO\Core\GDT_Template', true))
 		{
-// 		    if (class_exists('GDO\Util\Strings'))
-// 		    {
+		    if (class_exists('GDO\Util\Strings', true))
+		    {
 		        return Strings::nl2brHTMLSafe($this->body);
-// 		    }
-// 		    return $this->body;
+		    }
+		    return $this->body;
 		}
 		$tVars = [
 			'content' => $this->body,
