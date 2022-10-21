@@ -62,7 +62,7 @@ final class Module_Mail extends GDO_Module
     	];
     }
     
-    public function getACLDefaults() : ?array
+    public function getACLDefaults() : array
     {
     	return [
     		'email_format' => [GDT_ACLRelation::HIDDEN, 0, null],
