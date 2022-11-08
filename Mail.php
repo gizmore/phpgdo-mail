@@ -74,7 +74,7 @@ final class Mail
 	public function setBody($b) { $this->body = $b; }
 	public function setGPGKey($k) { $this->gpgKey = $k; }
 	public function setAllowGPG($bool) { $this->allowGPG = $bool; }
-	public function setResendCheck($bool) { $this->resendCheck = $bool; }
+// 	public function setResendCheck($bool) { $this->resendCheck = $bool; }
 	public function addAttachment($title, $data, $mime='application/octet-stream', $encrypted=true) { $this->attachments[$title] = array($data, $mime, $encrypted); }
 	public function removeAttachment($title) { unset($this->attachments[$title]); }
 	
@@ -131,16 +131,17 @@ final class Mail
 	
 	public function nestedHTMLBody()
 	{
+		$body = $this->body;
+		if (class_exists('GDO\Util\Strings', true))
+		{
+			$body = Strings::nl2brHTMLSafe($body);
+		}
 		if (!class_exists('GDO\Core\GDT_Template', true))
 		{
-		    if (class_exists('GDO\Util\Strings', true))
-		    {
-		        return Strings::nl2brHTMLSafe($this->body);
-		    }
-		    return $this->body;
+		    return $body;
 		}
 		$tVars = [
-			'content' => $this->body,
+			'content' => $body,
 		];
 		return GDT_Template::php('Mail', 'mail.php', $tVars);
 	}
@@ -174,7 +175,7 @@ final class Mail
 		$mail->setReceiver($receiver);
 		$mail->setSubject($subject);
 		$mail->setBody($body);
-		$mail->setResendCheck($resendCheck);
+// 		$mail->setResendCheck($resendCheck);
 		return $html ? $mail->sendAsHTML() : $mail->sendAsText();
 	}
 	

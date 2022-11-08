@@ -33,7 +33,7 @@ final class RequestValidation extends MethodForm
 		$user = GDO_User::current();
 		$form->text('info_email_request_validation');
 		$mail = $user->getMail(false);
-		$field = GDT_Email::make('_email')->initial($mail)->required();
+		$field = GDT_Email::make('_email')->initial($mail)->notNull();
 		$form->addFields($field, GDT_AntiCSRF::make());
 		$form->actions()->addField(GDT_Submit::make());
 	}

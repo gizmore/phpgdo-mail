@@ -19,9 +19,9 @@ final class Confirm extends MethodForm
 	public function createForm(GDT_Form $form): void
 	{
 		$form->addFields(
-			GDT_User::make('user')->required(),
-			GDT_Email::make('_email')->required(),
-			GDT_Token::make('token')->required(),
+			GDT_User::make('user')->notNull(),
+			GDT_Email::make('_email')->notNull(),
+			GDT_Token::make('token')->notNull(),
 		);
 		$form->addFields(
 			GDT_Validator::make()->validatorFor($form, 'token', [$this, 'validateToken']),
