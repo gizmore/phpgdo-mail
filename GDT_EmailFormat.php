@@ -23,6 +23,7 @@ final class GDT_EmailFormat extends GDT_Enum
 	protected function __construct()
 	{
 		parent::__construct();
+		$this->icon('format');
 		$this->enumValues(self::TEXT, self::HTML);
 	}
 
