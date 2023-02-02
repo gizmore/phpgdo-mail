@@ -30,7 +30,7 @@ final class Module_Mail extends GDO_Module
     
     public function getDependencies() : array
     {
-    	return ['Mailer'];
+    	return ['Mailer', 'Net'];
     }
     
     public function getFriendencies() : array
