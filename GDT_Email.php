@@ -63,7 +63,7 @@ class GDT_Email extends GDT_String
 	{
 		if ($this->currentUserMail = $bool)
 		{
-			$this->initial(Module_Mail::instance()->getUserMail());
+			$this->initial(Module_Mail::instance()->cfgUserEmail());
 		}
 		return $this;
 	}
