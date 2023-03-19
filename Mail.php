@@ -160,7 +160,7 @@ final class Mail
 	/**
 	 * Create a new mail from the GDO bot.
 	 */
-	public static function botMail() : self
+	public static function botMail(): static
 	{
 		$mail = new self();
 		$mail->setSender(GDO_BOT_EMAIL);

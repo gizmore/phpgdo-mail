@@ -34,7 +34,7 @@ class GDT_Email extends GDT_String
 		return false;
 	}
 
-	public function defaultLabel(): self
+	public function defaultLabel(): static
 	{
 		return $this->label('email');
 	}
