@@ -7,34 +7,36 @@ use GDO\User\GDO_User;
 /**
  * Email field.
  *
- * @author gizmore
  * @version 7.0.1
  * @since 5.0.0
+ * @author gizmore
  */
 class GDT_Email extends GDT_String
 {
+
 	public int $max = 170;
 
-	public string $pattern = "/^[^@]+@[^@]+$/iD";
+	public string $pattern = '/^[^@]+@[^@]+$/iD';
 
 	public string $icon = 'email';
+	public bool $currentUserMail = false;
 
-	public function getInputType() : string
+	public function getInputType(): string
 	{
 		return 'email';
 	}
-	
-	public function isSearchable() : bool
+
+	public function isSearchable(): bool
 	{
 		return GDO_User::current()->isStaff();
 	}
-	
+
 	public function isOrderable(): bool
 	{
 		return false;
 	}
 
-	public function defaultLabel(): static
+	public function defaultLabel(): self
 	{
 		return $this->label('email');
 	}
@@ -48,18 +50,18 @@ class GDT_Email extends GDT_String
 		return "<a class=\"gdo-email\" href=\"mailto:{$mail}\">{$mail}</a>";
 	}
 
-	public function plugVars() : array
+	###############
+	### Prefill ###
+	###############
+
+	public function plugVars(): array
 	{
 		return [
 			[$this->getName() => 'gizmore@wechall.net'],
 		];
 	}
-	
-	###############
-	### Prefill ###
-	###############
-	public bool $currentUserMail = false;
-	public function currentUserMail(bool $bool=true)
+
+	public function currentUserMail(bool $bool = true)
 	{
 		if ($this->currentUserMail = $bool)
 		{

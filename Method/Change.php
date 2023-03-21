@@ -1,15 +1,16 @@
 <?php
 namespace GDO\Mail\Method;
 
+use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
-use GDO\Form\MethodForm;
 use GDO\Form\GDT_Submit;
+use GDO\Form\MethodForm;
 use GDO\Mail\GDT_Email;
 use GDO\User\GDO_User;
-use GDO\Form\GDT_AntiCSRF;
 
 final class Change extends MethodForm
 {
+
 	public function createForm(GDT_Form $form): void
 	{
 		$form->text('info_change_mail');
@@ -19,12 +20,7 @@ final class Change extends MethodForm
 		);
 		$form->actions()->addField(GDT_Submit::make());
 	}
-	
-	public function getNewMail() : string
-	{
-		return $this->gdoParameterVar('newmail');
-	}
-	
+
 	public function formValidated(GDT_Form $form)
 	{
 		$user = GDO_User::current();
@@ -34,5 +30,10 @@ final class Change extends MethodForm
 		$href = href('Mail', 'RequestValidation');
 		return $this->redirectMessage('msg_mail_changing', [html($newmail)], $href);
 	}
-	
+
+	public function getNewMail(): string
+	{
+		return $this->gdoParameterVar('newmail');
+	}
+
 }

@@ -1,5 +1,6 @@
 <?php
 namespace GDO\Mail\lang;
+
 return [
 	'cfg_user_allow_email' => 'Personen erlauben, Ihnen E-Mails zu senden?',
 	'mt_mail_send' => 'Mail senden',
@@ -27,13 +28,13 @@ Das %3$s-System',
 	'mt_mail_change' => 'E-Mail Ändern',
 	'md_mail_change' => 'Ändern Sie Ihre E-Mail Adresse',
 	'msg_mail_changing' => 'Sie wollen Ihre E-Mail Adresse zu `%s` ändern. Bitte bestätigen Sie dies.',
-	
+
 	'mt_mail_validate' => 'E-Mail Bestätigen',
 	'md_mail_validate' => 'Validieren Sie Ihre E-Mail Adresse',
-	
+
 	'email' => 'E-Mail',
 	'email_confirmed' => 'Bestätigt am',
-	
+
 	# Request validation
 	'msg_mail_confirmed' => 'Your E-Mail has been confirmed and set to `%s`.',
 	'mailt_confirm_email' => '%s: Confirm your E-Mail',
@@ -46,7 +47,7 @@ Please confirm your E-Mail address by visiting this link:
 	
 Sincerly,
 The %s Team',
-	
+
 	# 7.0.1
 	'cfg_allow_email' => 'Allow email sending for users',
 

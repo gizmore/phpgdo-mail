@@ -16,13 +16,14 @@ use GDO\User\GDT_User;
 
 /**
  * Send a mail to a user.
- * 
- * @author gizmore
+ *
  * @version 7.0.0
  * @since 6.2.0
+ * @author gizmore
  */
 final class Send extends MethodForm
 {
+
 	public function createForm(GDT_Form $form): void
 	{
 		if (GDO_User::current()->hasMail())
@@ -45,11 +46,40 @@ final class Send extends MethodForm
 			$form->actions()->addField(GDT_Submit::make()->disabled());
 		}
 	}
-	
+
+	public function formValidated(GDT_Form $form)
+	{
+		$from = GDO_User::current();
+		$to = $form->getFormValue('user');
+		$title = $form->getFormValue('title');
+		/** @var $to GDO_User * */
+
+		$mail = Mail::botMail();
+		$mail->setReturn($from->getMail());
+		$mail->setReturnName($from->renderUserName());
+		$mail->setReceiver($to->getMail());
+		$mail->setReceiverName($to->renderUserName());
+		$mail->setSubject(t('mail_send_arbr_subj',
+			[sitename(), $title, $from->renderUserName()]));
+
+		$bodyArgs = [
+			$to->renderUserName(),
+			$from->renderUserName(),
+			sitename(),
+			$title,
+			$form->getFormValue('message'),
+		];
+		$mail->setBody(t('mail_send_arbr_body', $bodyArgs));
+
+		$mail->sendToUser($to);
+
+		return $this->message('msg_arbr_mail_sent', [$to->renderUserName()]);
+	}
+
 	/**
 	 * Validate if the user allows sending them an email.
 	 */
-	public function validateAllowance(GDT_Form $form, GDT $field, GDO_User $target=null) : bool
+	public function validateAllowance(GDT_Form $form, GDT $field, GDO_User $target = null): bool
 	{
 		if (!$target)
 		{
@@ -69,34 +99,5 @@ final class Send extends MethodForm
 		}
 		return true;
 	}
-	
-	public function formValidated(GDT_Form $form)
-	{
-		$from = GDO_User::current();
-		$to = $form->getFormValue('user');
-		$title = $form->getFormValue('title');
-		/** @var $to GDO_User **/
-		
-		$mail = Mail::botMail();
-		$mail->setReturn($from->getMail());
-		$mail->setReturnName($from->renderUserName());
-		$mail->setReceiver($to->getMail());
-		$mail->setReceiverName($to->renderUserName());
-		$mail->setSubject(t('mail_send_arbr_subj',
-			[sitename(), $title, $from->renderUserName()]));
-		
-		$bodyArgs = [
-			$to->renderUserName(),
-			$from->renderUserName(),
-			sitename(),
-			$title,
-			$form->getFormValue('message'),
-		];
-		$mail->setBody(t('mail_send_arbr_body', $bodyArgs));
-		
-		$mail->sendToUser($to);
-		
-		return $this->message('msg_arbr_mail_sent', [$to->renderUserName()]);
-	}
-	
+
 }
