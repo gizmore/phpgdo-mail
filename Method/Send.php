@@ -47,7 +47,7 @@ final class Send extends MethodForm
 		}
 	}
 
-	public function formValidated(GDT_Form $form)
+	public function formValidated(GDT_Form $form): GDT
 	{
 		$from = GDO_User::current();
 		$to = $form->getFormValue('user');

@@ -2,6 +2,7 @@
 namespace GDO\Mail\Method;
 
 use GDO\Account\Module_Account;
+use GDO\Core\GDT;
 use GDO\Core\GDT_Token;
 use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
@@ -39,7 +40,7 @@ final class RequestValidation extends MethodForm
 		$form->actions()->addField(GDT_Submit::make());
 	}
 
-	public function formValidated(GDT_Form $form)
+	public function formValidated(GDT_Form $form): GDT
 	{
 		$user = GDO_User::current();
 		$this->sendMail($user, $form->getFormVar('_email'));

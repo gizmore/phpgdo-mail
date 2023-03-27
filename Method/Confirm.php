@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Mail\Method;
 
+use GDO\Core\GDT;
 use GDO\Core\GDT_Token;
 use GDO\Date\Time;
 use GDO\Form\GDT_Form;
@@ -30,7 +31,7 @@ final class Confirm extends MethodForm
 		$form->actions()->addField(GDT_Submit::make());
 	}
 
-	public function formValidated(GDT_Form $form)
+	public function formValidated(GDT_Form $form): GDT
 	{
 		$email = $this->getEmail();
 		$this->confirmMail($this->getUser(), $email);

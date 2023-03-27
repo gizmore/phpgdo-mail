@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace GDO\Mail;
 
 use GDO\Core\GDT_String;
@@ -7,14 +8,14 @@ use GDO\User\GDO_User;
 /**
  * Email field.
  *
- * @version 7.0.1
+ * @version 7.0.3
  * @since 5.0.0
  * @author gizmore
  */
 class GDT_Email extends GDT_String
 {
 
-	public int $max = 170;
+	public ?int $max = 170;
 
 	public string $pattern = '/^[^@]+@[^@]+$/iD';
 
