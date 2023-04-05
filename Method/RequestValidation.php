@@ -3,6 +3,7 @@ namespace GDO\Mail\Method;
 
 use GDO\Account\Module_Account;
 use GDO\Core\GDT;
+use GDO\Core\GDT_Response;
 use GDO\Core\GDT_Token;
 use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
@@ -44,6 +45,7 @@ final class RequestValidation extends MethodForm
 	{
 		$user = GDO_User::current();
 		$this->sendMail($user, $form->getFormVar('_email'));
+		return GDT_Response::make();
 	}
 
 	public function sendMail(GDO_User $user, string $email)
