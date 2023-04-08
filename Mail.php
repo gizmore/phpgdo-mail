@@ -2,11 +2,13 @@
 namespace GDO\Mail;
 
 use GDO\CLI\CLI;
+use GDO\Core\Application;
 use GDO\Core\Debug;
 use GDO\Core\GDT_Template;
 use GDO\Mailer\Mailer;
 use GDO\UI\GDT_HTML;
 use GDO\UI\GDT_Page;
+use GDO\UI\TextStyle;
 use GDO\User\GDO_User;
 use GDO\Util\Strings;
 
@@ -74,7 +76,7 @@ final class Mail
 
 	public static function sendDebugMail($subject, $body)
 	{
-		$to = defined('GDO_ERROR_EMAIL') ? GDO_ERROR_EMAIL : GDO_ADMIN_EMAIL;
+		$to = def('GDO_ERROR_EMAIL', GDO_ADMIN_EMAIL);
 		return self::sendMailS(GDO_BOT_EMAIL, $to, GDO_SITENAME . ': ' . $subject, Debug::getDebugText($body), true, true);
 	}
 
@@ -124,18 +126,25 @@ final class Mail
 
 	private function printMailToDebugIt()
 	{
-		$printmail = sprintf('<h1>Local HTML EMail to %s:</h1><div>%s<br/>%s</div>', htmlspecialchars($this->receiver),
-			htmlspecialchars($this->subject), $this->nestedHTMLBody());
-		$html = GDT_HTML::make()->var($printmail);
+		if (!Application::instance()->isUnitTestVerbose())
+		{
+			echo TextStyle::bold("A mail has been sent!\n");
+		}
+		else
+		{
+			$printmail = sprintf('<h1>Local HTML EMail to %s:</h1><div>%s<br/>%s</div>', htmlspecialchars($this->receiver),
+				htmlspecialchars($this->subject), $this->nestedHTMLBody());
+			$html = GDT_HTML::make()->var($printmail);
 
-		$printmail = sprintf('<h1>Local Text EMail to %s:</h1><pre>%s<br/><br/>%s</pre>', htmlspecialchars($this->receiver),
-			htmlspecialchars($this->subject), $this->nestedTextBody());
-		$text = GDT_HTML::make()->var($printmail);
+			$printmail = sprintf('<h1>Local Text EMail to %s:</h1><pre>%s<br/><br/>%s</pre>', htmlspecialchars($this->receiver),
+				htmlspecialchars($this->subject), $this->nestedTextBody());
+			$text = GDT_HTML::make()->var($printmail);
 
-		GDT_Page::instance()->topResponse()->addFields($text, $html);
+			GDT_Page::instance()->topResponse()->addFields($text, $html);
+		}
 	}
 
-	public function nestedHTMLBody()
+	public function nestedHTMLBody(): string
 	{
 		$body = $this->body;
 		if (class_exists('GDO\Util\Strings', true))
@@ -152,12 +161,12 @@ final class Mail
 		return GDT_Template::php('Mail', 'mail.php', $tVars);
 	}
 
-	public function nestedTextBody()
+	public function nestedTextBody(): string
 	{
 		return CLI::htmlToCLI($this->body);
 	}
 
-	public function sendAsText($cc = '', $bcc = '')
+	public function sendAsText($cc = '', $bcc = ''): bool
 	{
 		$this->format = 'text';
 		return $this->send($cc, $bcc, $this->nestedTextBody(), false);
@@ -167,7 +176,7 @@ final class Mail
 
 	public function isHTML() { return $this->format === 'html'; }
 
-	public function setReply($r) { $this->reply = $r; }
+	public function setReply($r): void { $this->reply = $r; }
 
 	public function setReplyName($rn) { $this->replyName = $rn; }
 
