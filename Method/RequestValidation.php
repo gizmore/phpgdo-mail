@@ -31,7 +31,7 @@ final class RequestValidation extends MethodForm
 		}
 	}
 
-	public function createForm(GDT_Form $form): void
+	protected function createForm(GDT_Form $form): void
 	{
 		$user = GDO_User::current();
 		$form->text('info_email_request_validation');

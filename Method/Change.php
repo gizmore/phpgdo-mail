@@ -12,7 +12,7 @@ use GDO\User\GDO_User;
 final class Change extends MethodForm
 {
 
-	public function createForm(GDT_Form $form): void
+	protected function createForm(GDT_Form $form): void
 	{
 		$form->text('info_change_mail');
 		$form->addFields(

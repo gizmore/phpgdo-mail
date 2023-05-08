@@ -24,7 +24,7 @@ use GDO\User\GDT_User;
 final class Send extends MethodForm
 {
 
-	public function createForm(GDT_Form $form): void
+	protected function createForm(GDT_Form $form): void
 	{
 		if (GDO_User::current()->hasMail())
 		{
