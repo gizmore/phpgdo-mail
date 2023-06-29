@@ -39,9 +39,9 @@ class GDT_Email extends GDT_String
 		return false;
 	}
 
-	public function defaultLabel(): self
+	public function gdtDefaultLabel(): ?string
 	{
-		return $this->label('email');
+		return 'email';
 	}
 
 	public function renderHTML(): string

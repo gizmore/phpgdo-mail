@@ -25,9 +25,9 @@ final class GDT_EmailFormat extends GDT_Enum
 		$this->notNull();
 	}
 
-	public function defaultLabel(): self
+	public function gdtDefaultLabel(): ?string
 	{
-		return $this->label('email_fmt');
+		return 'email_fmt';
 	}
 
 }
