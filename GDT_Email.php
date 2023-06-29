@@ -22,6 +22,8 @@ class GDT_Email extends GDT_String
 	public string $icon = 'email';
 	public bool $currentUserMail = false;
 
+    public bool $searchable = false;
+
 	public function getInputType(): string
 	{
 		return 'email';
