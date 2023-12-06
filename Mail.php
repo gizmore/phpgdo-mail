@@ -124,9 +124,9 @@ final class Mail
 		return false;
 	}
 
-	private function printMailToDebugIt()
-	{
-		if (!Application::instance()->isUnitTestVerbose())
+	private function printMailToDebugIt(): void
+    {
+		if (Application::instance()->isUnitTests())
 		{
 			echo TextStyle::bold("A mail has been sent!\n");
 		}
