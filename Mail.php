@@ -5,6 +5,7 @@ use GDO\CLI\CLI;
 use GDO\Core\Application;
 use GDO\Core\Debug;
 use GDO\Core\GDT_Template;
+use GDO\Core\Logger;
 use GDO\Mailer\Mailer;
 use GDO\UI\GDT_HTML;
 use GDO\UI\GDT_Page;
@@ -135,10 +136,12 @@ final class Mail
 			$printmail = sprintf('<h1>Local HTML EMail to %s:</h1><div>%s<br/>%s</div>', htmlspecialchars($this->receiver),
 				htmlspecialchars($this->subject), $this->nestedHTMLBody());
 			$html = GDT_HTML::make()->var($printmail);
+            Logger::log('mail_html', $printmail);
 
 			$printmail = sprintf('<h1>Local Text EMail to %s:</h1><pre>%s<br/><br/>%s</pre>', htmlspecialchars($this->receiver),
 				htmlspecialchars($this->subject), $this->nestedTextBody());
 			$text = GDT_HTML::make()->var($printmail);
+            Logger::log('mail_text', $printmail);
 
 			GDT_Page::instance()->topResponse()->addFields($text, $html);
 		}
