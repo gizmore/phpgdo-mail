@@ -4,8 +4,6 @@ namespace GDO\Mail\lang;
 return [
 	'cfg_user_allow_email' => 'Allow people to email you?',
 	'mt_mail_send' => 'Send a mail',
-	'enum_html' => 'HTML',
-	'enum_text' => 'Text',
 	'info_send_mail' => 'Here you can send a mail to a user. Your own email will be known to them.',
 	'info_need_mail' => 'You need an own email address to send mails to other users.',
 	'err_user_does_not_want_mail' => 'This user does not want an email from you. This might be a general setting from them.',
@@ -32,7 +30,6 @@ The %3$s system',
 	'mt_mail_validate' => 'Validate Email',
 	'md_mail_validate' => 'Validate your Email Address',
 
-	'email' => 'E-Mail',
 	'email_confirmed' => 'Confirmed at',
 
 	# Request validation
