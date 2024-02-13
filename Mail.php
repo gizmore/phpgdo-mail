@@ -6,6 +6,7 @@ use GDO\Core\Application;
 use GDO\Core\Debug;
 use GDO\Core\GDT_Template;
 use GDO\Core\Logger;
+use GDO\Date\Time;
 use GDO\Mailer\Mailer;
 use GDO\UI\GDT_HTML;
 use GDO\UI\GDT_Page;
@@ -291,5 +292,10 @@ final class Mail
 			return $this->sendAsHTML();
 		}
 	}
+
+    public function getMessageId(): string
+    {
+        return time() . '-' . md5($this->sender . $this->receiver) . '@' . GDO_DOMAIN;
+    }
 
 }
