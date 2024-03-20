@@ -7,6 +7,7 @@ use GDO\Core\GDT_Checkbox;
 use GDO\Date\GDT_DateTime;
 use GDO\Date\Time;
 use GDO\Register\GDO_UserActivation;
+use GDO\Subscription\GDT_SubscribeType;
 use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 use GDO\UI\GDT_Page;
@@ -38,14 +39,35 @@ final class Module_Mail extends GDO_Module
 		return GDT::EMPTY_STRING;
 	}
 
-	public function getDependencies(): array
+//    public function sendMail($to, $subject, $body, $headers)
+//    {
+//        if ($this->cfgCronjobMail())
+//        {
+//            GDO_Mail::blank([
+//
+//            ])->insert();
+//        }
+//        else
+//        {
+//            return mail($to, $subject, $body, $headers);
+//        }
+//    }
+
+    public function getDependencies(): array
 	{
-		return ['Mailer', 'Net'];
+		return [
+            'Mailer',
+            'Net',
+        ];
 	}
 
 	public function getFriendencies(): array
 	{
-		return ['Account'];
+		return [
+            'Account',
+            'Cronjob',
+            'Subscription',
+        ];
 	}
 
 	public function onLoadLanguage(): void
@@ -57,7 +79,8 @@ final class Module_Mail extends GDO_Module
 	{
 		return [
 			GDT_Checkbox::make('allow_email')->initial('1'),
-			GDT_Checkbox::make('hook_sidebar')->initial('0'),
+            GDT_Checkbox::make('hook_sidebar')->initial('0'),
+            GDT_Checkbox::make('cronjob_mailer')->initial('0'),
 		];
 	}
 
@@ -157,5 +180,19 @@ final class Module_Mail extends GDO_Module
 			}
 		}
 	}
+
+    public function cfgCronjobMail(): bool
+    {
+        return module_enabled('Cronjob') &&
+            $this->getConfigValue('cronjob_mailer');
+    }
+
+    public function onModuleInit(): void
+    {
+        if (module_enabled('Subscription'))
+        {
+            GDT_SubscribeType::addSubscriptor($this);
+        }
+    }
 
 }

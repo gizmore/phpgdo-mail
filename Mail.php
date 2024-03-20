@@ -76,6 +76,13 @@ final class Mail
 
 	public function setSenderName($sn) { $this->senderName = $sn; }
 
+    public bool $lazy = false;
+    public function lazy(bool $lazy=true): self
+    {
+        $this->lazy = $lazy;
+        return $this;
+    }
+
 	public static function sendDebugMail($subject, $body)
 	{
 		$to = def('GDO_ERROR_EMAIL', GDO_ADMIN_EMAIL);
@@ -118,13 +125,23 @@ final class Mail
 		}
 		elseif (module_enabled('Mail'))
 		{
-			if (self::$ENABLE)
-			{
-				return Mailer::send($this);
-			}
-		}
-		return false;
-	}
+            if (self::$ENABLE)
+            {
+                if (Module_Mail::instance()->cfgCronjobMail() && $this->lazy)
+                {
+                    GDO_Mail::blank([
+                        'mail_data' => serialize($this),
+                    ])->insert();
+                    return true;
+                }
+                else
+                {
+                    return Mailer::send($this);
+                }
+            }
+        }
+        return false;
+    }
 
 	private function printMailToDebugIt(): void
     {

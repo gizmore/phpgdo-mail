@@ -35,7 +35,7 @@ final class Confirm extends MethodForm
 	{
 		$email = $this->getEmail();
 		$this->confirmMail($this->getUser(), $email);
-		$this->message('msg_mail_confirmed', [html($email)]);
+		return $this->message('msg_mail_confirmed', [html($email)]);
 	}
 
 	public function getEmail(): string
