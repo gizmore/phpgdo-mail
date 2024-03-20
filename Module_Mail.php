@@ -70,7 +70,14 @@ final class Module_Mail extends GDO_Module
         ];
 	}
 
-	public function onLoadLanguage(): void
+    public function getClasses(): array
+    {
+        return [
+            GDO_Mail::class,
+        ];
+    }
+
+    public function onLoadLanguage(): void
 	{
 		$this->loadLanguage('lang/mail');
 	}
