@@ -1,6 +1,7 @@
 <?php
 namespace GDO\Mail;
 
+use GDO\Core\GDO_DBException;
 use GDO\Core\GDO_Module;
 use GDO\Core\GDT;
 use GDO\Core\GDT_Checkbox;
@@ -133,18 +134,18 @@ final class Module_Mail extends GDO_Module
 
 	public function cfgUserAllowEmail(GDO_User $user = null): string
 	{
-		$user = $user ? $user : GDO_User::current();
+		$user = $user ?: GDO_User::current();
 		return $this->userSettingVar($user, 'allow_email');
 	}
 
 	public function cfgUserEmailFormat(GDO_User $user = null): string
 	{
-		$user = $user ? $user : GDO_User::current();
+		$user = $user ?: GDO_User::current();
 		return $this->userSettingVar($user, 'email_format');
 	}
 
-	public function hookAccountBar(GDT_Bar $nav)
-	{
+	public function hookAccountBar(GDT_Bar $nav): void
+    {
 		if ($this->cfgUserEmailConfirmed())
 		{
 			$nav->addField(GDT_Link::make('mt_mail_change')->href(href('Mail', 'Change')));
@@ -176,8 +177,11 @@ final class Module_Mail extends GDO_Module
 		return $this->userSettingVar($user, 'email');
 	}
 
-	public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation = null)
-	{
+    /**
+     * @throws GDO_DBException
+     */
+    public function hookUserActivated(GDO_User $user, GDO_UserActivation $activation = null): void
+    {
 		if ($activation !== null)
 		{
 			if ($email = $activation->getEmail())
