@@ -24,7 +24,18 @@ use GDO\User\GDT_User;
 final class Send extends MethodForm
 {
 
-	protected function createForm(GDT_Form $form): void
+    public function isCLI(): bool
+    {
+        return true;
+    }
+
+
+    public function getCLITrigger(): string
+    {
+        return 'sendmail';
+    }
+
+    protected function createForm(GDT_Form $form): void
 	{
 		if (GDO_User::current()->hasMail())
 		{
@@ -71,7 +82,10 @@ final class Send extends MethodForm
 		];
 		$mail->setBody(t('mail_send_arbr_body', $bodyArgs));
 
-		$mail->sendToUser($to);
+		if (!$mail->sendToUser($to))
+        {
+            return $this->error('err_send_mail');
+        }
 
 		return $this->message('msg_arbr_mail_sent', [$to->renderUserName()]);
 	}
@@ -83,6 +97,10 @@ final class Send extends MethodForm
 	{
 		if (!$target)
 		{
+            if ($field->hasError())
+            {
+                return false;
+            }
 			return $field->error('err_user');
 		}
 		if (!Module_Mail::instance()->userSettingValue($target, 'allow_email'))
@@ -95,7 +113,10 @@ final class Send extends MethodForm
 		}
 		if ($target === GDO_User::current())
 		{
-			return $field->error('err_arbr_mail_self');
+            if (!Module_Mail::instance()->cfgMailSelf())
+            {
+                return $field->error('err_arbr_mail_self');
+            }
 		}
 		return true;
 	}

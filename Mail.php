@@ -76,6 +76,10 @@ final class Mail
 
 	public function setSenderName($sn) { $this->senderName = $sn; }
 
+    public function getSender(): ?string { return $this->sender; }
+
+    public function getSenderName(): ?string { return $this->senderName; }
+
     public bool $lazy = false;
     public function lazy(bool $lazy=true): self
     {
@@ -298,7 +302,11 @@ final class Mail
 
 	public function setReceiverName($rn) { $this->receiverName = $rn; }
 
-	public function sendAsFormat(string $format): bool
+    public function getReceiver(): ?string { return $this->receiver; }
+
+    public function getReceiverName(): ?string { return $this->receiverName; }
+
+    public function sendAsFormat(string $format): bool
 	{
 		if ($format === 'text')
 		{

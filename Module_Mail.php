@@ -86,7 +86,8 @@ final class Module_Mail extends GDO_Module
 	public function getConfig(): array
 	{
 		return [
-			GDT_Checkbox::make('allow_email')->initial('1'),
+            GDT_Checkbox::make('allow_email')->initial('1'),
+            GDT_Checkbox::make('allow_self_mail')->initial('1'),
             GDT_Checkbox::make('hook_sidebar')->initial('0'),
             GDT_Checkbox::make('cronjob_mailer')->initial('0'),
 		];
@@ -176,6 +177,11 @@ final class Module_Mail extends GDO_Module
 		$user = $user ? $user : GDO_User::current();
 		return $this->userSettingVar($user, 'email');
 	}
+
+    public function cfgMailSelf(): bool
+    {
+        return $this->getConfigValue('allow_self_mail');
+    }
 
     /**
      * @throws GDO_DBException
