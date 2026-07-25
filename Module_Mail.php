@@ -104,15 +104,16 @@ final class Module_Mail extends GDO_Module
 	public function getACLDefaults(): array
 	{
 		return [
-			'email_format' => [GDT_ACLRelation::HIDDEN, '0', null],
+            'allow_email' => [GDT_ACLRelation::HIDDEN, '0', null],
+            'email_format' => [GDT_ACLRelation::HIDDEN, '0', null],
 		];
 	}
 
 	public function getUserSettings(): array
 	{
 		return [
-			GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email')->noacl(),
-			GDT_EmailFormat::make('email_format')->initial('html')->noacl(),
+			GDT_Checkbox::make('allow_email')->initial('1')->label('cfg_user_allow_email')->noacl()->hidden(),
+			GDT_EmailFormat::make('email_format')->initial('html')->noacl()->hidden(),
 		];
 	}
 
