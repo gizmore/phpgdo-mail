@@ -96,8 +96,8 @@ final class Module_Mail extends GDO_Module
 	public function getUserConfig(): array
 	{
 		return [
-			GDT_Email::make('email'),
-			GDT_DateTime::make('email_confirmed')->noacl(),
+			GDT_Email::make('email')->hidden(),
+			GDT_DateTime::make('email_confirmed')->noacl()->hidden(),
 		];
 	}
 
