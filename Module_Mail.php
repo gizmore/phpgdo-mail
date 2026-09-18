@@ -158,6 +158,18 @@ final class Module_Mail extends GDO_Module
 		}
 	}
 
+	public function hookProfileMenubar(GDT_Bar $bar, GDO_User $user): void
+	{
+		$current = GDO_User::current();
+		if ($this->cfgAllowEmail() && $current->hasMail() && $user->hasMail() &&
+			($user->getID() !== $current->getID() || $this->cfgMailSelf()) && $this->cfgUserAllowEmail($user))
+		{
+			$bar->addField(GDT_Link::make('mt_mail_send')
+				->href(href('Mail', 'Send', '&user=' . $user->getID()))
+				->icon('mail'));
+		}
+	}
+
 	public function cfgUserEmailConfirmed(GDO_User $user = null): ?string
 	{
 		if ($this->cfgUserEmailIsConfirmed($user))
