@@ -25,6 +25,7 @@ The %3$s system',
 	# 7.0.0
 	'mt_mail_change' => 'Change Email',
 	'md_mail_change' => 'Change your Email Address',
+	'info_change_mail' => 'Here you can change your mail to a new one.',
 	'msg_mail_changing' => 'You are about to change your email to `%s`. Please confirm this.',
 
 	'mt_mail_validate' => 'Validate Email',

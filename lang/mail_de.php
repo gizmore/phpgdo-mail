@@ -25,6 +25,7 @@ Das %3$s-System',
 	# 7.0.0
 	'mt_mail_change' => 'E-Mail Ändern',
 	'md_mail_change' => 'Ändern Sie Ihre E-Mail Adresse',
+	'info_change_mail' => 'Hier können Sie Ihre E-Mail-Adresse ändern.',
 	'msg_mail_changing' => 'Sie wollen Ihre E-Mail Adresse zu `%s` ändern. Bitte bestätigen Sie dies.',
 
 	'mt_mail_validate' => 'E-Mail Bestätigen',

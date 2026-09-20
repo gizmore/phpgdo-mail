@@ -23,6 +23,7 @@ return [
 %3$s 시스템',
 	'mt_mail_change' => '이메일 변경',
 	'md_mail_change' => '이메일 주소 변경',
+	'info_change_mail' => '여기에서 이메일 주소를 변경할 수 있습니다.',
 	'msg_mail_changing' => '이메일을 `%s`(으)로 변경하려고 합니다. 이것을 확인해 주십시오.',
 	'mt_mail_validate' => '이메일 검증',
 	'md_mail_validate' => '이메일 주소를 확인하세요',
