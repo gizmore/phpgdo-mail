@@ -47,6 +47,8 @@ The %s Team',
 
 	# 7.0.1
 	'cfg_allow_email' => 'Allow email sending for users',
+	'cfg_allow_self_mail' => 'E-Mails an sich selbst erlauben?',
+	'cfg_cronjob_mailer' => 'E-Mail-Versand über Cronjob ausführen?',
 
 	'mt_mail_requestvalidation' => 'E-Mail Validation',
 	'info_email_request_validation' => 'Here you can setup your account email.',
