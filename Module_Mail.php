@@ -40,20 +40,6 @@ final class Module_Mail extends GDO_Module
 		return GDT::EMPTY_STRING;
 	}
 
-//    public function sendMail($to, $subject, $body, $headers)
-//    {
-//        if ($this->cfgCronjobMail())
-//        {
-//            GDO_Mail::blank([
-//
-//            ])->insert();
-//        }
-//        else
-//        {
-//            return mail($to, $subject, $body, $headers);
-//        }
-//    }
-
     public function getDependencies(): array
 	{
 		return [
@@ -124,7 +110,7 @@ final class Module_Mail extends GDO_Module
 			if ($this->cfgAllowEmail())
 			{
 				GDT_Page::instance()->rightBar()->addField(
-					GDT_Link::make('mt_mail_send')->href(
+					GDT_Link::make('mt_mail_send')->icon('email')->href(
 						href('Mail', 'Send')));
 			}
 		}
@@ -150,11 +136,11 @@ final class Module_Mail extends GDO_Module
     {
 		if ($this->cfgUserEmailConfirmed())
 		{
-			$nav->addField(GDT_Link::make('mt_mail_change')->href(href('Mail', 'Change')));
+			$nav->addField(GDT_Link::make('mt_mail_change')->href(href('Mail', 'Change'))->icon('email'));
 		}
 		else
 		{
-			$nav->addField(GDT_Link::make('mt_mail_validate')->href(href('Mail', 'RequestValidation')));
+			$nav->addField(GDT_Link::make('mt_mail_validate')->href(href('Mail', 'RequestValidation'))->icon('email'));
 		}
 	}
 
@@ -166,7 +152,7 @@ final class Module_Mail extends GDO_Module
 		{
 			$bar->addField(GDT_Link::make('mt_mail_send')
 				->href(href('Mail', 'Send', '&user=' . $user->getID()))
-				->icon('mail'));
+				->icon('email'));
 		}
 	}
 

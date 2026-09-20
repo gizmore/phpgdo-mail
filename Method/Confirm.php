@@ -18,7 +18,12 @@ final class Confirm extends MethodForm
 
 	public function isTrivial(): bool { return false; }
 
-	protected function createForm(GDT_Form $form): void
+    public function isShownInSitemap(): bool
+    {
+        return false;
+    }
+
+    protected function createForm(GDT_Form $form): void
 	{
 		$form->addFields(
 			GDT_User::make('user')->notNull(),
